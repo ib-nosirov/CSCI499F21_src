@@ -1,21 +1,22 @@
-if __name__ == "__main__":
-  # Create the dataset for Ax = y
-  A = torch.randn(10,11)
-  x_train = torch.randn(100,10)
-  y_train = torch.matmul(x_train, A)
+import torch
+import torch.nn as nn
 
-  # We will use values of y to predict x, in effect modelling the linear
-  # transformation A.
-  NN = NeuralNetwork()
+import model_fc
+import trainer
+import tester
 
-  for i in range(1000):  # trains the NN 1,000 times
-    print ("#" + str(i) + " Loss: "
-    + str(torch.mean((x_train - NN.forward(y_train))**2).detach().item()))
-    NN.train(x_train, y_train)
+A = torch.randn(10,11)
+x_train = torch.randn(100,10)
+y_train = torch.matmul(x_train, A)
 
-  x_test = [torch.randn(1,10) for i in range(10)]
-  y_test = [torch.matmul(x_test[i], A) for i in range(10)]
+weights = [11, 5, 6, 5, 10]
 
-  for i in range(10):
-    print ("Test Loss: "
-    + str(torch.mean((x_test[i] - NN.forward(y_test[i]))**2).detach().item()))
+NN = model_fc.ModelFc(weights)
+
+trainer.train(y_train, x_train, NN.weights_list, 1000)
+
+x_test = [torch.randn(1,10) for i in range(10)]
+y_test = [torch.matmul(x_test[i], A) for i in range(10)]
+y_test = [trainer.forward(y_test[i], NN.weights_list)[0] for i in range(10)]
+
+tester.test(x_test, y_test)

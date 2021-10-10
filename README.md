@@ -1,8 +1,9 @@
 # CSCI499F21_src
 
-TODO:
-1. Write source code for Unrolled NN.
-	
-2. All source for blackbox nn sits in `model_base.py'. Need to refactor code to imitate:
-		https://github.com/google-research/lottery-ticket-hypothesis
+Source code for Fall 2021 independent study.
 
+## Projects:
+
+  1. Black box neural network from scratch without autograd to solve
+Ax=y.
+  2. Unrolled neural network to solve Ax=y.
