@@ -12,5 +12,8 @@ class UnrolledLayer(nn.Module):
     self.y = y
 
   def forward(self, x):
-    return x - self.eta * torch.matmul(self.A_T, torch.matmul(self.A, x)
-           - self.y)
+    return x - self.eta * torch.matmul(
+			  self.A_T, torch.matmul(self.A, x) - self.y)
+
+  def set_y(self, y):
+    self.y = y
