@@ -17,5 +17,14 @@ A = torch.randn(n_measurements, n_features)
 x_train = torch.randn(n_samples, n_features)
 y_train = A.matmul(x_train.permute(1,0)).permute(1,0)
 
+x_validate = torch.randn(n_samples, n_features)
+y_validate = A.matmul(x_train.permute(1,0)).permute(1,0)
+
 data_train = TensorDataset(x_train, y_train)
-trainer.train(data_train, A, max_epochs, batch_size)
+data_validate = TensorDataset(x_validate, y_validate)
+trainerClass = trainer.Trainer(data_train, data_validate, A, max_epochs,
+                               batch_size)
+trainerClass.train()
+
+#x_test = torch.randn(n_samples, n_features)
+#y_test = A.matmul(x_test.permute(1,0)).permute(1,0)

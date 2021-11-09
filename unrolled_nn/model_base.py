@@ -9,3 +9,7 @@ class ModelBase(nn.Module):
 
   def unrolledLayer(self, A):
     return custom.UnrolledLayer(A)
+
+  def writeTrainingSummaries(self, training_cost, validate_cost):
+    return
+    #writeToFile
