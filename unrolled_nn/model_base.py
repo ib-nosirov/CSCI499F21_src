@@ -7,5 +7,5 @@ class ModelBase(nn.Module):
   def __init__(self):
     super().__init__()
 
-  def layer(self, y, A):
-    return custom.UnrolledLayer(y, A)
+  def unrolledLayer(self, A):
+    return custom.UnrolledLayer(A)
